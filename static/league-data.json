@@ -1,0 +1,337 @@
+{
+  "id": "114429",
+  "name": "Liga Del Noroeste 2017",
+  "teams": [
+    {
+      "id": "1",
+      "name": "Hardwood Addicts",
+      "owner": "Gerardo Rodriguez",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "201",
+            "fga": "386",
+            "fgp": ".521",
+            "ftm": "75",
+            "fta": "99",
+            "ftp": ".758",
+            "3ptm": "48",
+            "pts": "525",
+            "reb": "194",
+            "ast": "108",
+            "stl": "29",
+            "blk": "24",
+            "to": "63"
+          }
+        },
+        {
+          "id": "2",
+          "name": "Week 2",
+          "categories": {
+            "fgm": "240",
+            "fga": "496",
+            "fgp": ".484",
+            "ftm": "92",
+            "fta": "117",
+            "ftp": ".786",
+            "3ptm": "53",
+            "pts": "625",
+            "reb": "239",
+            "ast": "140",
+            "stl": "50",
+            "blk": "28",
+            "to": "94"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Goonies",
+      "owner": "Earl Swigert",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "170",
+            "fga": "373",
+            "fgp": ".456",
+            "ftm": "96",
+            "fta": "122",
+            "ftp": ".787",
+            "3ptm": "58",
+            "pts": "494",
+            "reb": "150",
+            "ast": "102",
+            "stl": "35",
+            "blk": "33",
+            "to": "60"
+          }
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Darick Dang's Team",
+      "owner": "Darick Dang",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "181",
+            "fga": "406",
+            "fgp": ".446",
+            "ftm": "71",
+            "fta": "96",
+            "ftp": ".740",
+            "3ptm": "35",
+            "pts": "468",
+            "reb": "205",
+            "ast": "82",
+            "stl": "31",
+            "blk": "20",
+            "to": "51"
+          }
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "LAUSD's Finest",
+      "owner": "Mark Padoongpat",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "156",
+            "fga": "297",
+            "fgp": ".525",
+            "ftm": "72",
+            "fta": "88",
+            "ftp": ".818",
+            "3ptm": "27",
+            "pts": "411",
+            "reb": "177",
+            "ast": "92",
+            "stl": "22",
+            "blk": "18",
+            "to": "59"
+          }
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Mexíca Ballers",
+      "owner": "Jose Peña",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "161",
+            "fga": "379",
+            "fgp": ".425",
+            "ftm": "76",
+            "fta": "93",
+            "ftp": ".817",
+            "3ptm": "37",
+            "pts": "435",
+            "reb": "194",
+            "ast": "89",
+            "stl": "47",
+            "blk": "23",
+            "to": "82"
+          }
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Two Inch Vertical",
+      "owner": "Jason Grigsby",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "153",
+            "fga": "382",
+            "fgp": ".401",
+            "ftm": "94",
+            "fta": "106",
+            "ftp": ".887",
+            "3ptm": "60",
+            "pts": "460",
+            "reb": "158",
+            "ast": "96",
+            "stl": "22",
+            "blk": "14",
+            "to": "59"
+          }
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Abraham Lincoln High",
+      "owner": "Derek Shirk",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "138",
+            "fga": "311",
+            "fgp": ".444",
+            "ftm": "91",
+            "fta": "108",
+            "ftp": ".843",
+            "3ptm": "32",
+            "pts": "399",
+            "reb": "167",
+            "ast": "110",
+            "stl": "29",
+            "blk": "11",
+            "to": "76"
+          }
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Yeti Ball",
+      "owner": "Richard Kriheli",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "211",
+            "fga": "456",
+            "fgp": ".463",
+            "ftm": "90",
+            "fta": "112",
+            "ftp": ".804",
+            "3ptm": "51",
+            "pts": "563",
+            "reb": "215",
+            "ast": "99",
+            "stl": "26",
+            "blk": "19",
+            "to": "78"
+          }
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Choche",
+      "owner": "Jorge De La Torre",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "181",
+            "fga": "389",
+            "fgp": ".465",
+            "ftm": "78",
+            "fta": "106",
+            "ftp": ".736",
+            "3ptm": "41",
+            "pts": "481",
+            "reb": "142",
+            "ast": "71",
+            "stl": "30",
+            "blk": "32",
+            "to": "69"
+          }
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "name": "Mayra's Team",
+      "owner": "Mayra Nevarez",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "136",
+            "fga": "333",
+            "fgp": ".408",
+            "ftm": "74",
+            "fta": "96",
+            "ftp": ".771",
+            "3ptm": "25",
+            "pts": "371",
+            "reb": "173",
+            "ast": "93",
+            "stl": "32",
+            "blk": "19",
+            "to": "70"
+          }
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "name": "Aaron's Team",
+      "owner": "Aaron Bingham",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "182",
+            "fga": "415",
+            "fgp": ".439",
+            "ftm": "95",
+            "fta": "119",
+            "ftp": ".798",
+            "3ptm": "49",
+            "pts": "508",
+            "reb": "226",
+            "ast": "102",
+            "stl": "28",
+            "blk": "16",
+            "to": "54"
+          }
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "name": "Free Carson",
+      "owner": "Chris Dennett",
+      "weeklyStats": [
+        {
+          "id": "1",
+          "name": "Week 1",
+          "categories": {
+            "fgm": "163",
+            "fga": "349",
+            "fgp": ".467",
+            "ftm": "76",
+            "fta": "101",
+            "ftp": ".752",
+            "3ptm": "24",
+            "pts": "426",
+            "reb": "170",
+            "ast": "88",
+            "stl": "43",
+            "blk": "14",
+            "to": "58"
+          }
+        }
+      ]
+    }
+  ]
+}
