@@ -3,7 +3,7 @@
     <ul v-for="team in teams">
       <li>{{ team.name }}</li>
     </ul>
-    {{ teamAverages }}
+    <pre>{{ teamAverages }}</pre>
   </section>
 </template>
 
