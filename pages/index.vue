@@ -52,45 +52,136 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+  import { mapGetters } from 'vuex';
+  import * as d3 from 'd3';
 
-export default {
-  computed: {
-    ...mapGetters({
-      teams: 'teams',
-      teamAverages: 'teamAverages'
-    })
-  }
-};
+  /* eslint-disable no-unused-vars */
+  const WIDTH = 600;
+  const HEIGHT = 500;
+  const MARGINS = {
+    top: 20,
+    right: 20,
+    bottom: 20,
+    left: 40
+  };
+  /* eslint-enable no-unused-vars */
+
+  export default {
+    data () {
+      return {
+        info: [{
+          'sale': '202',
+          'year': '2000'
+        }, {
+          'sale': '215',
+          'year': '2001'
+        }, {
+          'sale': '179',
+          'year': '2002'
+        }, {
+          'sale': '199',
+          'year': '2003'
+        }, {
+          'sale': '134',
+          'year': '2004'
+        }, {
+          'sale': '176',
+          'year': '2010'
+        }],
+        info2: [{
+          'sale': '102',
+          'year': '2000'
+        }, {
+          'sale': '115',
+          'year': '2001'
+        }, {
+          'sale': '101',
+          'year': '2002'
+        }, {
+          'sale': '144',
+          'year': '2003'
+        }, {
+          'sale': '166',
+          'year': '2004'
+        }, {
+          'sale': '100',
+          'year': '2010'
+        }]
+      };
+    },
+    computed: {
+      ...mapGetters({
+        state: 'state',
+        teams: 'teams',
+        teamsSortedByPtsTotal: 'teamsSortedByPtsTotal',
+        teamsSortedByPtsAverage: 'teamsSortedByPtsAverage',
+        teamsSortedBy3ptmAverage: 'teamsSortedBy3ptmAverage',
+        teamsSortedByRebAverage: 'teamsSortedByRebAverage',
+        teamsSortedByAstAverage: 'teamsSortedByAstAverage',
+        teamsSortedByStlAverage: 'teamsSortedByStlAverage',
+        teamsSortedByBlkAverage: 'teamsSortedByBlkAverage',
+        teamsSortedByToAverage: 'teamsSortedByToAverage'
+      })
+    },
+    mounted () {
+      const vis = d3.select('#visualization');
+
+      const xScale = d3.scaleLinear().range(
+        [MARGINS.left, WIDTH - MARGINS.right]
+      ).domain(
+        d3.extent([...this.info, ...this.info2], function (d) {
+          return d['year']; // [2000, 2010]
+        })
+      );
+
+      const yScale = d3.scaleLinear().range(
+        [HEIGHT - MARGINS.top, MARGINS.bottom]
+      ).domain(
+        d3.extent([...this.info, ...this.info2], function (d) {
+          return d['sale']; // [134, 215]
+        })
+      );
+
+      const xAxis = d3.axisBottom(xScale);
+      const yAxis = d3.axisLeft(yScale);
+
+      const dataLine = d3.line()
+        .x(function (d) {
+          return xScale(d['year']);
+        })
+        .y(function (d) {
+          return yScale(d['sale']);
+        });
+
+      // Create x axis using xAxis
+      vis.append('g')
+        .attr('class', 'x-axis')
+        .attr('transform', `translate(0, ${HEIGHT - MARGINS.bottom})`)
+        .call(xAxis);
+
+      // Create y axis using yAxis
+      vis.append('g')
+        .attr('class', 'y-axis')
+        .attr('transform', `translate(${MARGINS.left}, 0)`)
+        .call(yAxis);
+
+      vis.append('path')
+        .attr('d', dataLine(this.info))
+        .attr('stroke', 'blue')
+        .attr('strok-width', 2)
+        .attr('fill', 'none');
+
+      vis.append('path')
+        .attr('d', dataLine(this.info2))
+        .attr('stroke', 'red')
+        .attr('strok-width', 2)
+        .attr('fill', 'none');
+    }
+  };
 </script>
 
 <style>
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+  body {
+    padding: 2em;
+  }
 </style>
