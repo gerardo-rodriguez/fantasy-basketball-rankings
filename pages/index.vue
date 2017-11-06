@@ -1,53 +1,53 @@
 <template>
   <section>
-    <!-- <h2>points total</h2>
-    <ol>
-      <li v-for="team in teamsSortedByPtsTotal">{{ team.totals.pts }}: {{ team.name }}</li>
-    </ol> -->
-
     <div class="container">
-      <div class="jumbotron">
-        <svg id="visualization" width="1000" height="500"></svg>
-      </div>
+      <svg id="visualization" width="1000" height="500"></svg>
     </div>
 
-    <h2>points avg</h2>
-    <ol>
-      <li v-for="team in teamsSortedByPtsAverage">{{ team.averages.pts }}: {{ team.name }}</li>
-    </ol>
+    <div class="lists">
+      <!-- <h2>points total</h2>
+      <ol>
+        <li v-for="team in teamsSortedByPtsTotal">{{ team.totals.pts }}: {{ team.name }}</li>
+      </ol> -->
 
-    <h2>3ptm avg</h2>
-    <ol>
-      <li v-for="team in teamsSortedBy3ptmAverage">{{ team.averages['3ptm'] }}: {{ team.name }}</li>
-    </ol>
+      <h2>points avg</h2>
+      <ol>
+        <li v-for="team in teamsSortedByPtsAverage">{{ team.averages.pts }}: {{ team.name }}</li>
+      </ol>
 
-    <h2>rebound avg</h2>
-    <ol>
-      <li v-for="team in teamsSortedByRebAverage">{{ team.averages.reb }}: {{ team.name }}</li>
-    </ol>
+      <h2>3ptm avg</h2>
+      <ol>
+        <li v-for="team in teamsSortedBy3ptmAverage">{{ team.averages['3ptm'] }}: {{ team.name }}</li>
+      </ol>
 
-    <h2>assists avg</h2>
-    <ol>
-      <li v-for="team in teamsSortedByAstAverage">{{ team.averages.ast }}: {{ team.name }}</li>
-    </ol>
+      <h2>rebound avg</h2>
+      <ol>
+        <li v-for="team in teamsSortedByRebAverage">{{ team.averages.reb }}: {{ team.name }}</li>
+      </ol>
 
-    <h2>steal avg</h2>
-    <ol>
-      <li v-for="team in teamsSortedByStlAverage">{{ team.averages.stl }}: {{ team.name }}</li>
-    </ol>
+      <h2>assists avg</h2>
+      <ol>
+        <li v-for="team in teamsSortedByAstAverage">{{ team.averages.ast }}: {{ team.name }}</li>
+      </ol>
 
-    <h2>block avg</h2>
-    <ol>
-      <li v-for="team in teamsSortedByBlkAverage">{{ team.averages.blk }}: {{ team.name }}</li>
-    </ol>
+      <h2>steal avg</h2>
+      <ol>
+        <li v-for="team in teamsSortedByStlAverage">{{ team.averages.stl }}: {{ team.name }}</li>
+      </ol>
 
-    <h2>TO avg</h2>
-    <ol>
-      <li v-for="team in teamsSortedByToAverage">{{ team.averages.to }}: {{ team.name }}</li>
-    </ol>
+      <h2>block avg</h2>
+      <ol>
+        <li v-for="team in teamsSortedByBlkAverage">{{ team.averages.blk }}: {{ team.name }}</li>
+      </ol>
 
-    <!-- <pre>{{ teamsSortedByPtsTotal }}</pre> -->
-    <!-- <pre>{{ teams }}</pre> -->
+      <h2>TO avg</h2>
+      <ol>
+        <li v-for="team in teamsSortedByToAverage">{{ team.averages.to }}: {{ team.name }}</li>
+      </ol>
+
+      <!-- <pre>{{ teamsSortedByPtsTotal }}</pre> -->
+      <!-- <pre>{{ teams }}</pre> -->
+    </div>
   </section>
 </template>
 
@@ -70,43 +70,43 @@
     data () {
       return {
         info: [{
-          'sale': '202',
-          'year': '2000'
+          rank: 4,
+          category: 'pts'
         }, {
-          'sale': '215',
-          'year': '2001'
+          rank: 4,
+          category: '3ptm'
         }, {
-          'sale': '179',
-          'year': '2002'
+          rank: 6,
+          category: 'reb'
         }, {
-          'sale': '199',
-          'year': '2003'
+          rank: 1,
+          category: 'ast'
         }, {
-          'sale': '134',
-          'year': '2004'
+          rank: 5,
+          category: 'stl'
         }, {
-          'sale': '176',
-          'year': '2010'
+          rank: 5,
+          category: 'blk'
         }],
         info2: [{
-          'sale': '102',
-          'year': '2000'
+          rank: 2,
+          category: 'pts'
         }, {
-          'sale': '115',
-          'year': '2001'
+          rank: 1,
+          category: '3ptm'
         }, {
-          'sale': '101',
-          'year': '2002'
+          rank: 2,
+          category: 'reb'
         }, {
-          'sale': '144',
-          'year': '2003'
+          rank: 5,
+          category: 'ast'
         }, {
-          'sale': '166',
-          'year': '2004'
+          rank: 3,
+          category: 'stl'
         }, {
-          'sale': '100',
-          'year': '2010'
-        }]
+          rank: 7,
+          category: 'blk'
+        }],
       };
     },
     computed: {
@@ -126,31 +126,33 @@
     mounted () {
       const vis = d3.select('#visualization');
 
-      const xScale = d3.scaleLinear().range(
-        [MARGINS.left, WIDTH - MARGINS.right]
-      ).domain(
-        d3.extent([...this.info, ...this.info2], function (d) {
-          return d['year']; // [2000, 2010]
-        })
-      );
+      // const xScale = d3.scaleLinear().range(
+      //   [MARGINS.left, WIDTH - MARGINS.right]
+      // ).domain(
+      //   d3.extent([...this.info, ...this.info2], function (d) {
+      //     return d.category; // [2000, 2010]
+      //   })
+      // );
 
-      const yScale = d3.scaleLinear().range(
-        [HEIGHT - MARGINS.top, MARGINS.bottom]
-      ).domain(
-        d3.extent([...this.info, ...this.info2], function (d) {
-          return d['sale']; // [134, 215]
-        })
-      );
+      const xScale = d3.scalePoint()
+        .range([MARGINS.left, WIDTH - MARGINS.right])
+        .domain(['pts', '3ptm', 'reb', 'ast', 'stl', 'blk']);
+
+      const yScale = d3.scaleLinear()
+        .range([MARGINS.bottom, HEIGHT - MARGINS.top])
+        .domain(d3.extent([...this.info, ...this.info2], function (d) {
+          return d.rank; // [134, 215]
+        }));
 
       const xAxis = d3.axisBottom(xScale);
       const yAxis = d3.axisLeft(yScale);
 
       const dataLine = d3.line()
         .x(function (d) {
-          return xScale(d['year']);
+          return xScale(d.category);
         })
         .y(function (d) {
-          return yScale(d['sale']);
+          return yScale(d.rank);
         });
 
       // Create x axis using xAxis
