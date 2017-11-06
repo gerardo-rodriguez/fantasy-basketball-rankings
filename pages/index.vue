@@ -1,9 +1,53 @@
 <template>
   <section>
-    <ul v-for="team in teams">
-      <li>{{ team.name }}</li>
-    </ul>
-    <pre>{{ teamAverages }}</pre>
+    <!-- <h2>points total</h2>
+    <ol>
+      <li v-for="team in teamsSortedByPtsTotal">{{ team.totals.pts }}: {{ team.name }}</li>
+    </ol> -->
+
+    <div class="container">
+      <div class="jumbotron">
+        <svg id="visualization" width="1000" height="500"></svg>
+      </div>
+    </div>
+
+    <h2>points avg</h2>
+    <ol>
+      <li v-for="team in teamsSortedByPtsAverage">{{ team.averages.pts }}: {{ team.name }}</li>
+    </ol>
+
+    <h2>3ptm avg</h2>
+    <ol>
+      <li v-for="team in teamsSortedBy3ptmAverage">{{ team.averages['3ptm'] }}: {{ team.name }}</li>
+    </ol>
+
+    <h2>rebound avg</h2>
+    <ol>
+      <li v-for="team in teamsSortedByRebAverage">{{ team.averages.reb }}: {{ team.name }}</li>
+    </ol>
+
+    <h2>assists avg</h2>
+    <ol>
+      <li v-for="team in teamsSortedByAstAverage">{{ team.averages.ast }}: {{ team.name }}</li>
+    </ol>
+
+    <h2>steal avg</h2>
+    <ol>
+      <li v-for="team in teamsSortedByStlAverage">{{ team.averages.stl }}: {{ team.name }}</li>
+    </ol>
+
+    <h2>block avg</h2>
+    <ol>
+      <li v-for="team in teamsSortedByBlkAverage">{{ team.averages.blk }}: {{ team.name }}</li>
+    </ol>
+
+    <h2>TO avg</h2>
+    <ol>
+      <li v-for="team in teamsSortedByToAverage">{{ team.averages.to }}: {{ team.name }}</li>
+    </ol>
+
+    <!-- <pre>{{ teamsSortedByPtsTotal }}</pre> -->
+    <!-- <pre>{{ teams }}</pre> -->
   </section>
 </template>
 

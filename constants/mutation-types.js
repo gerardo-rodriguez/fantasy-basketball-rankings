@@ -5,6 +5,7 @@
  */
 
 /**
- * Navigation data store
+ * Data store
  */
 export const SET_TEAM_DATA = 'SET_TEAM_DATA';
+export const CALCULATE_TEAM_AVERAGES = 'CALCULATE_TEAM_AVERAGES';
