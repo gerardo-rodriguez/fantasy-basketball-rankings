@@ -1,6 +1,7 @@
 import {
   SET_TEAM_DATA,
-  CALCULATE_TEAM_AVERAGES } from '../constants/mutation-types';
+  CALCULATE_TEAM_AVERAGES,
+  CALCULATE_TEAM_AVERAGE_RANKINGS } from '../constants/mutation-types';
 import axios from 'axios';
 
 const DATA_URL = 'http://localhost:3000/league-data.json';
@@ -36,6 +37,11 @@ export const actions = {
         type: CALCULATE_TEAM_AVERAGES,
         data
       });
+
+      commit({
+        type: CALCULATE_TEAM_AVERAGE_RANKINGS,
+        data
+      });
     } catch ({ message }) {
       console.log(message);
       return error({ statusCode: 404, message });
@@ -55,7 +61,7 @@ export const mutations = {
       // Weekly stats level
       const teamAverages = team.weeklyStats.reduce(
         (obj, week, index) => {
-          // Used to find the average.
+          // Helps find the average, won't divide by totalWeeks until last item.
           const multiplier = index + 1 === totalWeeks ? 1 / totalWeeks : 1;
 
           // Helper to calculate the total.
@@ -120,34 +126,230 @@ export const mutations = {
 
       return arr;
     }, []);
+  },
+  [CALCULATE_TEAM_AVERAGE_RANKINGS]: (state, { data }) => {
+    calculateTeamAvgRankings(state);
   }
 };
+
+/**
+ * Curry function to assist in descending sort by type & category
+ *
+ * Types: 'averages', 'totals'
+ * Categories: 'pts', '3ptm', 'reb', etc.
+ *
+ * @param  {String} type The type to sort against (e.g "averages"/"totals").
+ * @param  {String} category The category to sort by.
+ * @param  {Object} team1 The first team to compare.
+ * @param  {Object} team2 The second team to compare.
+ * @return {Array} Desc sorted array.
+ */
+const sortByTypeCategoryDesc =
+  type =>
+    category =>
+      (team1, team2) =>
+        team2[type][category] - team1[type][category];
+
+/**
+ * Curry function to assist in ascending sort by type & category
+ *
+ * Types: 'averages', 'totals'
+ * Categories: 'pts', '3ptm', 'reb', etc.
+ *
+ * @param  {String} type The type to sort against (e.g "averages"/"totals").
+ * @param  {String} category The category to sort by.
+ * @param  {Object} team2 The second team to compare.
+ * @return {Array} Ascending sorted array.
+ */
+const sortByTypeCategoryAsc =
+  type =>
+    category =>
+      (team1, team2) =>
+        team1[type][category] - team2[type][category];
+
+/**
+ * Descending & ascending average sort curry functions
+ * @type {Function}
+ */
+const sortByAvgCategoryDesc = sortByTypeCategoryDesc('averages');
+const sortByAvgCategoryAsc = sortByTypeCategoryAsc('averages');
+
+/**
+ * Descending & ascending totals sort curry functions
+ * @type {Function}
+ */
+const sortByTotalCategoryDesc = sortByTypeCategoryDesc('totals');
+
+/***********************************************
+ * Totals sorting helper functions
+ ***********************************************/
+
+/**
+ * Leverages curry function to sort by pts descending.
+ * @type {Function}
+ */
+const sortByTotalPtsDesc = sortByTotalCategoryDesc('pts');
+
+/***********************************************
+ * Average sorting helper functions
+ ***********************************************/
+
+/**
+ * Leverages curry function to sort by pts descending.
+ * @type {Function}
+ */
+const sortByAvgPtsDesc = sortByAvgCategoryDesc('pts');
+/**
+ * Leverages curry function to sort by pts descending.
+ * @type {Function}
+ */
+const sortByAvgFGPDesc = sortByAvgCategoryDesc('fgp');
+const sortByAvgFTPDesc = sortByAvgCategoryDesc('ftp');
+/**
+ * Leverages curry function to sort by 3ptm descending.
+ * @type {Function}
+ */
+const sortByAvg3ptmDesc = sortByAvgCategoryDesc('3ptm');
+/**
+ * Leverages curry function to sort by reb descending.
+ * @type {Function}
+ */
+const sortByAvgRebDesc = sortByAvgCategoryDesc('reb');
+/**
+ * Leverages curry function to sort by ast descending.
+ * @type {Function}
+ */
+const sortByAvgAstDesc = sortByAvgCategoryDesc('ast');
+/**
+ * Leverages curry function to sort by stl descending.
+ * @type {Function}
+ */
+const sortByAvgStlDesc = sortByAvgCategoryDesc('stl');
+/**
+ * Leverages curry function to sort by blk descending.
+ * @type {Function}
+ */
+const sortByAvgBlkDesc = sortByAvgCategoryDesc('blk');
+/**
+ * Leverages curry function to sort by to descending.
+ * @type {Function}
+ */
+const sortByAvgTOAscending = sortByAvgCategoryAsc('to');
+
+/****************/
+
+const teamsSortedByTotalPts =
+  state => [...state.data.teams].sort(sortByTotalPtsDesc);
+
+const teamsSortedByAvgPts =
+  state => [...state.data.teams].sort(sortByAvgPtsDesc);
+
+const teamsSortedByAvgFGP =
+  state => [...state.data.teams].sort(sortByAvgFGPDesc);
+
+const teamsSortedByAvgFTP =
+  state => [...state.data.teams].sort(sortByAvgFTPDesc);
+
+const teamsSortedByAvg3ptm =
+  state => [...state.data.teams].sort(sortByAvg3ptmDesc);
+
+const teamsSortedByAvgReb =
+  state => [...state.data.teams].sort(sortByAvgRebDesc);
+
+const teamsSortedByAvgAst =
+  state => [...state.data.teams].sort(sortByAvgAstDesc);
+
+const teamsSortedByAvgStl =
+  state => [...state.data.teams].sort(sortByAvgStlDesc);
+
+const teamsSortedByAvgBlk =
+  state => [...state.data.teams].sort(sortByAvgBlkDesc);
+
+const teamsSortedByAvgTO =
+  state => [...state.data.teams].sort(sortByAvgTOAscending);
+
+/****************/
+
+// TODO: Use reduce() function?
+const calculateTeamAvgRankings = state => {
+
+  teamsSortedByAvgFGP(state).map((team, i) => {
+    team.rankings = [{
+      rank: i + 1,
+      category: 'fgp'
+    }];
+  });
+
+  teamsSortedByAvgFTP(state).map((team, i) => {
+    team.rankings.push({
+      rank: i + 1,
+      category: 'ftp'
+    });
+  });
+
+  teamsSortedByAvgPts(state).map((team, i) => {
+    team.rankings.push({
+      rank: i + 1,
+      category: 'pts'
+    });
+  });
+
+  teamsSortedByAvg3ptm(state).map((team, i) => {
+    team.rankings.push({
+      rank: i + 1,
+      category: '3ptm'
+    });
+  });
+
+  teamsSortedByAvgReb(state).map((team, i) => {
+    team.rankings.push({
+      rank: i + 1,
+      category: 'reb'
+    });
+  });
+
+  teamsSortedByAvgAst(state).map((team, i) => {
+    team.rankings.push({
+      rank: i + 1,
+      category: 'ast'
+    });
+  });
+
+  teamsSortedByAvgStl(state).map((team, i) => {
+    team.rankings.push({
+      rank: i + 1,
+      category: 'stl'
+    });
+  });
+
+  teamsSortedByAvgBlk(state).map((team, i) => {
+    team.rankings.push({
+      rank: i + 1,
+      category: 'blk'
+    });
+  });
+
+  teamsSortedByAvgTO(state).map((team, i) => {
+    team.rankings.push({
+      rank: i + 1,
+      category: 'to'
+    });
+  });
+};
+
+/****************/
 
 export const getters = {
   leagueName: state => state.data.name,
   teams: state => state.data.teams,
-  teamsSortedByPtsTotal: state => [...state.data.teams].sort(
-    (team1, team2) => team2.totals.pts - team1.totals.pts
-  ),
-  teamsSortedByPtsAverage: state => [...state.data.teams].sort(
-    (team1, team2) => team2.averages.pts - team1.averages.pts
-  ),
-  teamsSortedBy3ptmAverage: state => [...state.data.teams].sort(
-    (team1, team2) => team2.averages['3ptm'] - team1.averages['3ptm']
-  ),
-  teamsSortedByRebAverage: state => [...state.data.teams].sort(
-    (team1, team2) => team2.averages.reb - team1.averages.reb
-  ),
-  teamsSortedByAstAverage: state => [...state.data.teams].sort(
-    (team1, team2) => team2.averages.ast - team1.averages.ast
-  ),
-  teamsSortedByStlAverage: state => [...state.data.teams].sort(
-    (team1, team2) => team2.averages.stl - team1.averages.stl
-  ),
-  teamsSortedByBlkAverage: state => [...state.data.teams].sort(
-    (team1, team2) => team2.averages.blk - team1.averages.blk
-  ),
-  teamsSortedByToAverage: state => [...state.data.teams].sort(
-    (team1, team2) => team1.averages.to - team2.averages.to
-  )
+  teamsSortedByTotalPts,
+  teamsSortedByAvgFGP,
+  teamsSortedByAvgFTP,
+  teamsSortedByAvgPts,
+  teamsSortedByAvg3ptm,
+  teamsSortedByAvgReb,
+  teamsSortedByAvgAst,
+  teamsSortedByAvgStl,
+  teamsSortedByAvgBlk,
+  teamsSortedByAvgTO
 };
