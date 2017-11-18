@@ -4,6 +4,9 @@
   "description": "Nuxt.js project",
   "author": "Gerardo Rodriguez <mr.gerardo.rodriguez@gmail.com>",
   "private": true,
+  "engines": {
+    "node": "8.1.2"
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
