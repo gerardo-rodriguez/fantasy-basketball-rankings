@@ -121,7 +121,7 @@
   export default {
     data () {
       return {
-        selectedTeamId: ''
+        selectedTeamId: '1'
       };
     },
     components: {
