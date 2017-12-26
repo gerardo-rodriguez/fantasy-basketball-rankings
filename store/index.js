@@ -337,6 +337,10 @@ const calculateTeamAvgRankings = state => {
   });
 };
 
+const getTeam = state => teamId => state.data.teams.find(
+  team => team.id == teamId
+);
+
 /****************/
 
 export const getters = {
@@ -351,5 +355,6 @@ export const getters = {
   teamsSortedByAvgAst,
   teamsSortedByAvgStl,
   teamsSortedByAvgBlk,
-  teamsSortedByAvgTO
+  teamsSortedByAvgTO,
+  getTeam
 };
