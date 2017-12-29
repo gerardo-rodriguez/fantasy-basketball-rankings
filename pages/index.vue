@@ -1,6 +1,5 @@
 <template>
   <section>
-
     <form>
       <label class="u-block" v-for="team in teams">
         <input
@@ -13,6 +12,12 @@
     </form>
 
     <p>{{ selectedTeamId }}</p>
+
+    <TeamsChart
+      :teams="teams"
+      :selectedTeamId="selectedTeamId"
+      :xDomain="xDomainTeamsChart"
+      :yDomain="yDomainTeamsChart" />
 
     <div class="lists">
       <!-- <h2>points total</h2>
@@ -100,18 +105,14 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import * as d3 from 'd3';
   import RankingList from '../components/ranking-list';
+  import TeamsChart from '../components/line-chart';
 
   /* eslint-disable no-unused-vars */
-  const WIDTH = 600;
-  const HEIGHT = 500;
-  const MARGINS = {
-    top: 20,
-    right: 20,
-    bottom: 20,
-    left: 40
-  };
+  // const xDomainTeamsChart = this.teams[0].rankings.reduce((arr, ranking) => {
+  //   arr.push(ranking.category);
+  //   return arr;
+  // }, []);
   /* eslint-enable no-unused-vars */
 
   export default {
@@ -121,7 +122,8 @@
       };
     },
     components: {
-      RankingList
+      RankingList,
+      TeamsChart
     },
     computed: {
       ...mapGetters({
@@ -137,9 +139,18 @@
         teamsSortedByAvgStl: 'teamsSortedByAvgStl',
         teamsSortedByAvgBlk: 'teamsSortedByAvgBlk',
         teamsSortedByAvgTO: 'teamsSortedByAvgTO'
-      })
+      }),
+      xDomainTeamsChart () {
+        return this.teams[0].rankings.reduce((arr, ranking) => {
+          arr.push(ranking.category);
+          return arr;
+        }, []);
+      },
+      yDomainTeamsChart () {
+        return [1, this.teams.length];
+      }
     },
-    mounted () {
+    methods: {
     }
   };
 </script>
