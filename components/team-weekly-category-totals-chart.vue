@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h2>{{ team.name }} weekly 3pm category totals</h2>
-    <svg id="visualization" width="600" height="500">
+    <h2>{{ team.name }}</h2>
+    <h3>{{ category }} category week-by-week totals</h3>
+    <svg :id="chartName" width="600" height="500">
       <path
         :d="pathData"
         stroke="green"
@@ -29,32 +30,39 @@
       team: {
         type: Object,
         required: true
+      },
+      category: {
+        type: String,
+        required: true
       }
     },
     mounted () {
       console.log('xDomain', this.xDomain);
       console.log('yDomain', this.yDomain);
       console.log('pathData', this.pathData);
+      console.log('this.category', this.category);
+      console.log('this.chartName', this.chartName);
 
-      const vis = d3.select('#visualization');
+      const vis = d3.select(`#${this.chartName}`);
 
       const xAxis = d3.axisBottom(this.xScale);
       const yAxis = d3.axisLeft(this.yScale);
 
       // Create x axis using xAxis
       vis.append('g')
-        .attr('class', 'x-axis')
         .attr('transform', `translate(0, ${HEIGHT - MARGINS.bottom})`)
         .call(xAxis);
 
       // Create y axis using yAxis
       vis.append('g')
-        .attr('class', 'y-axis')
         .attr('transform', `translate(${MARGINS.left}, 0)`)
         .call(yAxis);
 
     },
     computed: {
+      chartName () {
+        return `viz-${this.category}`;
+      },
       xScale () {
         return d3.scaleLinear()
           .domain(this.xDomain)
@@ -62,7 +70,8 @@
       },
       yScale () {
         return d3.scaleLinear()
-          .domain(d3.extent(this.yDomain))
+          // .domain(d3.extent(this.yDomain).reverse())
+          .domain([d3.max(this.yDomain), 0])
           .range([MARGINS.bottom, HEIGHT - MARGINS.top]);
       },
       xDomain () {
@@ -70,20 +79,21 @@
       },
       yDomain () {
         return this.team.weeklyStats.reduce((arr, week) => {
-          arr.push(week.categories['3ptm']);
+          arr.push(week.categories[this.category]);
           return arr;
         }, []);
       },
       pathData () {
         const xScale = this.xScale;
         const yScale = this.yScale;
+        const category = this.category;
 
         const dataLine = d3.line()
           .x(function (week, i) {
             return xScale(i + 1);
           })
           .y(function (week) {
-            return yScale(week.categories['3ptm']);
+            return yScale(week.categories[category]);
           });
 
         return dataLine(this.team.weeklyStats);

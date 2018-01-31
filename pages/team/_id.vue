@@ -2,7 +2,19 @@
   <div>
     <nuxt-link to="/">Home</nuxt-link>
     <p>team: {{ team.name }}</p>
-    <WeeklyTotalsChart :team="team" />
+    <WeeklyTotalsChart :team="team" category="fgm" />
+    <WeeklyTotalsChart :team="team" category="fga" />
+    <WeeklyTotalsChart :team="team" category="fgp" />
+    <WeeklyTotalsChart :team="team" category="ftm" />
+    <WeeklyTotalsChart :team="team" category="fta" />
+    <WeeklyTotalsChart :team="team" category="ftp" />
+    <WeeklyTotalsChart :team="team" category="3ptm" />
+    <WeeklyTotalsChart :team="team" category="pts" />
+    <WeeklyTotalsChart :team="team" category="reb" />
+    <WeeklyTotalsChart :team="team" category="ast" />
+    <WeeklyTotalsChart :team="team" category="stl" />
+    <WeeklyTotalsChart :team="team" category="blk" />
+    <WeeklyTotalsChart :team="team" category="to" />
   </div>
 </template>
 
