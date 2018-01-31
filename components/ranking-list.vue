@@ -1,9 +1,9 @@
 <template>
   <ol>
-    <li
-      v-for="team in teams"
+    <li v-for="team in teams" :key="team.id"
       :class="{ 'u-text-bold': team.id === selectedTeamId }">
-        {{ team[categoryType][categoryName] }}: {{ team.name }}
+        {{ team[categoryType][categoryName] }}:
+        <nuxt-link :to="`team/${team.id}`">{{ team.name }}</nuxt-link>
     </li>
   </ol>
 </template>

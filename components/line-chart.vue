@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <svg id="visualization" width="1000" height="500">
-      <path v-for="line in lines"
+      <path v-for="line in lines" :key="line.team.id"
         :d="line.lineData"
         :stroke="stroke(line.team)"
         :stroke-width="strokeWidth(line.team)"
@@ -28,19 +28,20 @@
   export default {
     props: {
       teams: {
-        required: true,
-        type: Array
+        type: Array,
+        required: true
       },
       selectedTeamId: {
-        type: String
+        type: String,
+        required: true
       },
       xDomain: {
-        required: true,
-        type: Array
+        type: Array,
+        required: true
       },
       yDomain: {
-        required: true,
-        type: Array
+        type: Array,
+        required: true
       }
     },
     methods: {

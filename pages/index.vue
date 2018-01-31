@@ -1,7 +1,7 @@
 <template>
   <section>
     <form>
-      <label class="u-block" v-for="team in teams">
+      <label class="u-block" v-for="team in teams" :key="team.id">
         <input
           type="radio"
           name="teams"
@@ -11,13 +11,14 @@
       </label>
     </form>
 
-    <p>{{ selectedTeamId }}</p>
+    <hr>
+    <p>Team ID selected: {{ selectedTeamId }}</p>
+    <hr>
 
     <TeamsChart
       :teams="teams"
       :selectedTeamId="selectedTeamId"
-      :xDomain="xDomainTeamsChart"
-      :yDomain="yDomainTeamsChart" />
+    />
 
     <div class="lists">
       <!-- <h2>points total</h2>
@@ -106,7 +107,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import RankingList from '../components/ranking-list';
-  import TeamsChart from '../components/line-chart';
+  import TeamsChart from '../components/team-average-rankings-chart';
 
   /* eslint-disable no-unused-vars */
   // const xDomainTeamsChart = this.teams[0].rankings.reduce((arr, ranking) => {
@@ -139,16 +140,7 @@
         teamsSortedByAvgStl: 'teamsSortedByAvgStl',
         teamsSortedByAvgBlk: 'teamsSortedByAvgBlk',
         teamsSortedByAvgTO: 'teamsSortedByAvgTO'
-      }),
-      xDomainTeamsChart () {
-        return this.teams[0].rankings.reduce((arr, ranking) => {
-          arr.push(ranking.category);
-          return arr;
-        }, []);
-      },
-      yDomainTeamsChart () {
-        return [1, this.teams.length];
-      }
+      })
     },
     methods: {
     }

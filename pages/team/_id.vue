@@ -1,27 +1,23 @@
 <template>
-  <p>team: {{ team.name }}</p>
+  <div>
+    <nuxt-link to="/">Home</nuxt-link>
+    <p>team: {{ team.name }}</p>
+    <WeeklyTotalsChart :team="team" />
+  </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import WeeklyTotalsChart from
+    '../../components/team-weekly-category-totals-chart';
 
   export default {
-    asyncData (context) {
-      // console.log('log', context.store);
-      // this.team = context.store.getters.getTeam(context.route.params.id);
-    },
-    data () {
+    asyncData ({ store, route }) {
       return {
-        team: {}
+        team: store.getters.getTeam(route.params.id)
       };
     },
-    mounted () {
-      this.team = this.getTeam(this.$route.params.id);
-    },
-    computed: {
-      ...mapGetters({
-        getTeam: 'getTeam',
-      })
+    components: {
+      WeeklyTotalsChart
     }
   };
 </script>
