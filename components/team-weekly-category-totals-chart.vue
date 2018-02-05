@@ -78,7 +78,9 @@
       },
       yDomain () {
         return this.team.weeklyStats.reduce((arr, week) => {
-          arr.push(week.categories[this.category]);
+          arr.push(
+            Number.parseFloat(week.categories[this.category])
+          );
           return arr;
         }, []);
       },
