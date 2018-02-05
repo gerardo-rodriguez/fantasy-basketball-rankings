@@ -37,11 +37,11 @@
       }
     },
     mounted () {
-      console.log('xDomain', this.xDomain);
-      console.log('yDomain', this.yDomain);
-      console.log('pathData', this.pathData);
-      console.log('this.category', this.category);
-      console.log('this.chartName', this.chartName);
+      // console.log('\n\nxDomain', this.xDomain);
+      // console.log('yDomain', this.yDomain);
+      // console.log('pathData', this.pathData);
+      // console.log('this.category', this.category);
+      // console.log('this.chartName', this.chartName);
 
       const vis = d3.select(`#${this.chartName}`);
 
@@ -57,7 +57,6 @@
       vis.append('g')
         .attr('transform', `translate(${MARGINS.left}, 0)`)
         .call(yAxis);
-
     },
     computed: {
       chartName () {
