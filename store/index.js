@@ -46,10 +46,7 @@ export const actions = {
       console.log(message);
       return error({ statusCode: 404, message });
     }
-  },
-
-  // getTeam ({ co}) {
-  // }
+  }
 };
 
 export const mutations = {
