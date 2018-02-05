@@ -85,16 +85,12 @@
         }, []);
       },
       pathData () {
-        const xScale = this.xScale;
-        const yScale = this.yScale;
-        const category = this.category;
-
         const dataLine = d3.line()
-          .x(function (week, i) {
-            return xScale(i + 1);
+          .x((week, i) => {
+            return this.xScale(i + 1);
           })
-          .y(function (week) {
-            return yScale(week.categories[category]);
+          .y(week => {
+            return this.yScale(week.categories[this.category]);
           });
 
         return dataLine(this.team.weeklyStats);
