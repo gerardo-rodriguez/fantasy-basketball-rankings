@@ -45,12 +45,7 @@
       }
     },
     mounted () {
-      // console.log('\n\nxDomain', this.xDomain);
-      // console.log('yDomain', this.yDomain);
-      // console.log('pathData', this.pathData);
-      // console.log('this.category', this.category);
-      // console.log('this.chartName', this.chartName);
-
+      // TODO: Have this render before mount???
       const vis = d3.select(`#${this.chartName}`);
 
       const xAxis = d3.axisBottom(this.xScale);
