@@ -116,3 +116,9 @@
   };
 </script>
 
+<style scoped>
+  circle:hover {
+    fill: red;
+    cursor: pointer;
+  }
+</style>
