@@ -8,7 +8,15 @@
         stroke="green"
         stroke-width="2"
         fill="none"
-        ></path>
+      ></path>
+      <circle
+        v-for="week in team.weeklyStats"
+        :key="`${category}-week-${week.id}`"
+        :cx="xPos(week)"
+        :cy="yPos(week)"
+        r="5"
+        fill="green"
+      ></circle>
     </svg>
   </div>
 </template>
@@ -58,6 +66,24 @@
         .attr('transform', `translate(${MARGINS.left}, 0)`)
         .call(yAxis);
     },
+    methods: {
+      /**
+       * Calculates the x position using the xScale()
+       * @param {Object} week An object representing a week's data for a team
+       * @returns {Number} The x position value
+       */
+      xPos (week) {
+        return this.xScale(week.id);
+      },
+      /**
+       * Calculates the y position using the yScale()
+       * @param {Object} week An object representing a week's data for a team
+       * @returns {Number} The y position value
+       */
+      yPos (week) {
+        return this.yScale(week.categories[this.category]);
+      }
+    },
     computed: {
       chartName () {
         return `viz-${this.category}`;
@@ -86,12 +112,8 @@
       },
       pathData () {
         const dataLine = d3.line()
-          .x((week, i) => {
-            return this.xScale(i + 1);
-          })
-          .y(week => {
-            return this.yScale(week.categories[this.category]);
-          });
+          .x(this.xPos)
+          .y(this.yPos);
 
         return dataLine(this.team.weeklyStats);
       }
