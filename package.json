@@ -20,7 +20,7 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
-    "axios": "^0.17.0",
+    "axios": "^0.17.1",
     "d3": "^4.11.0",
     "nuxt": "^2.3.4"
   },
