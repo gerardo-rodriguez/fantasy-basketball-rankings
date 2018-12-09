@@ -24,5 +24,9 @@
     "d3": "^5.7.0",
     "nuxt": "^2.3.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@cloudfour/eslint-plugin": "^2.0.1",
+    "eslint": "^5.10.0",
+    "prettier": "^1.15.3"
+  }
 }
