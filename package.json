@@ -15,24 +15,23 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "check-lint": "prettier --list-different '**/*.js' && eslint '**/*.js'",
+    "lint": "prettier --write '**/*.js' && eslint --fix '**/*.js'",
     "precommit": "npm run lint",
     "heroku-postbuild": "npm run build"
   },
+  "prettier": {
+    "singleQuote": true
+  },
   "dependencies": {
-    "axios": "^0.17.0",
-    "d3": "^4.11.0",
-    "nuxt": "^1.0.0-rc11"
+    "axios": "^0.17.1",
+    "d3": "^5.7.0",
+    "nuxt": "^2.3.4"
   },
   "devDependencies": {
-    "@cloudfour/eslint-config": "github:cloudfour/eslint-config",
-    "babel-eslint": "^7.2.3",
-    "eslint": "^4.3.0",
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-html": "^3.1.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "@cloudfour/eslint-plugin": "^2.0.1",
+    "eslint": "^5.10.0",
+    "eslint-plugin-html": "^5.0.0",
+    "prettier": "^1.15.3"
   }
 }
