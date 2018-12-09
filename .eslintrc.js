@@ -5,17 +5,15 @@ module.exports = {
     browser: true,
     node: true
   },
-  extends: '@cloudfour/eslint-config',
+  extends: 'plugin:@cloudfour/recommended',
   // required to lint *.vue files
-  plugins: [
-    'html'
-  ],
+  plugins: ['html'],
   // add your custom rules here
   rules: {
     // Allow comments at the end of lines
-    "lines-around-comment": "off",
+    'lines-around-comment': 'off',
     // Allows for ”undefined” things like fixtures
-    "no-undef": "off"
+    'no-undef': 'off'
   },
   globals: {}
-}
+};

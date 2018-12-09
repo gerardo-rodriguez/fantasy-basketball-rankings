@@ -15,9 +15,13 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "check-lint": "prettier --list-different '**/*.js' && eslint '**/*.js'",
+    "lint": "prettier --write '**/*.js' && eslint --fix '**/*.js'",
     "precommit": "npm run lint",
     "heroku-postbuild": "npm run build"
+  },
+  "prettier": {
+    "singleQuote": true
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -27,6 +31,7 @@
   "devDependencies": {
     "@cloudfour/eslint-plugin": "^2.0.1",
     "eslint": "^5.10.0",
+    "eslint-plugin-html": "^5.0.0",
     "prettier": "^1.15.3"
   }
 }
