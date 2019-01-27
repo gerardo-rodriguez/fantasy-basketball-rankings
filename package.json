@@ -20,18 +20,20 @@
     "precommit": "npm run lint",
     "heroku-postbuild": "npm run build"
   },
+  "eslintConfig": {
+    "extends": "plugin:@cloudfour/recommended"
+  },
   "prettier": {
     "singleQuote": true
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.18.0",
     "d3": "^5.7.0",
     "nuxt": "^2.3.4"
   },
   "devDependencies": {
     "@cloudfour/eslint-plugin": "^2.0.1",
-    "eslint": "^5.10.0",
-    "eslint-plugin-html": "^5.0.0",
-    "prettier": "^1.15.3"
+    "eslint": "^5.12.1",
+    "prettier": "^1.16.1"
   }
 }
